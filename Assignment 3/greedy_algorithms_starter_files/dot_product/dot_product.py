@@ -4,10 +4,20 @@ import sys
 
 def max_dot_product(a, b):
     #write your code here
+    # print("A,B %s %s" % (a,b)) 
     res = 0
-    for i in range(len(a)):
-        res += a[i] * b[i]
-    return res
+    # for i in range(len(a)):
+    #     res += a[i] * b[i]
+
+    if len(a)<=1:
+        res += a[0] * b[0]
+        return res
+    else:
+        a.sort()
+        b.sort()
+        for i in range(len(a)):
+            res += a[i]*b[i]
+        return res
 
 if __name__ == '__main__':
     input = sys.stdin.read()
