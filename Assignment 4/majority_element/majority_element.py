@@ -1,18 +1,25 @@
+#!/usr/bin/python3 
 # Uses python3
 import sys
 
-def get_majority_element(a, left, right):
-    if left == right:
-        return -1
-    if left + 1 == right:
-        return a[left]
-    #write your code here
-    return -1
+def get_majority_element(a,n):
+    d={}
+    for i in a:
+        if d.get(i) == None:
+            d[i] = 1
+        else:
+            d[i]=d[i] + 1
+
+    count = 0
+    for x in d.values():
+        if x > n/2:
+            count+=1
+
+    return count    
+
+         
 
 if __name__ == '__main__':
     input = sys.stdin.read()
     n, *a = list(map(int, input.split()))
-    if get_majority_element(a, 0, n) != -1:
-        print(1)
-    else:
-        print(0)
+    print(get_majority_element(a,n))

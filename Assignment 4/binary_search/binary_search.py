@@ -1,9 +1,20 @@
 # Uses python3
 import sys
 
-def binary_search(a, x):
-    left, right = 0, len(a)
-    # write your code here
+def binary_search(a,l,r,x):
+	# write your code here
+	if r>=l:
+		midPos = (l+r)//2
+		mid = a[midPos]
+		if mid == x:
+			return midPos
+		elif mid < x:
+			return binary_search(a,midPos + 1 ,r, x)
+		else:
+			return binary_search(a,l,midPos - 1, x)
+	else:
+		return -1
+
 
 def linear_search(a, x):
     for i in range(len(a)):
@@ -19,4 +30,4 @@ if __name__ == '__main__':
     a = data[1 : n + 1]
     for x in data[n + 2:]:
         # replace with the call to binary_search when implemented
-        print(linear_search(a, x), end = ' ')
+        print(binary_search(a,0,len(a)-1,x), end = ' ')
