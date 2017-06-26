@@ -5,41 +5,35 @@ from collections import namedtuple
 Segment = namedtuple('Segment', 'start end')
 
 def optimal_points(segments):
+	points = [] 
+	#write your code here
+	setList = []
+	some = []
 
-    points = []
-    final = []
-    
-    #write your code here
+	for s in segments:
+		list1=[i for i in range(s.start,s.end + 1)]
+		setList.append(set(list1))
 
-    for s in segments:
-        points.append(s.start)
-        points.append(s.end)
+   	#I have now a list of sets containing all possible combination
+   	#Complexity till now is n*n.Lets complete this first.
 
-    points.sort()    
-    dictPoints={}
-    lenPoints=len(points)
+	#Find if there is an element that satisfies all conditions.
+	for i in range(len(setList)):
+		#compare as much sets as possible to find a comman point
+		for j in range(i+1 , len(setList)):
+			if(not setList[i].isdisjoint(setList[j])):
+				sim = setList[i].intersection(setList[j])
+				some.append(sim)
+	print(some)
+			
 
-    for i in range(points[0],points[lenPoints-1]+1):
-        dictPoints[i] = 0
-        for s in segments:
-            if i >= s.start and i <= s.end:
-                dictPoints[i] += 1
-    
-    list1=list(dictPoints.values())
-    list1.sort(reverse = True)
-    
-    #Find the minimum num points that satisfies all lines.
-
-
-    print(dictPoints)
-    print(list1)
-    return final
+	
 
 if __name__ == '__main__':
     input = sys.stdin.read()
     n, *data = map(int, input.split())
     segments = list(map(lambda x: Segment(x[0], x[1]), zip(data[::2], data[1::2])))
     points = optimal_points(segments)
-    print(len(points))
-    for p in points:
-        print(p, end=' ')
+    # print(len(points))
+    # for p in points:
+    #     print(p, end=' ')
